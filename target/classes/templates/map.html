@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title> MAPJS Map Exemple</title>
+<!-- Leaflet's CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="crossorigin=""/>
+<style>
+#map{
+	width: 1270px;
+	height: 600px;
+}
+.popup{
+	font-size: 1.5rem;
+	
+}
+#btnHome {
+	color: red;
+	font-size: 40px;
+	margin-left: 50px;
+	position: fixed;
+		}
+</style
+<!-- Bootstrap -->
+	<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<!--        <link href="dist/css/bootstrap-navbar-dropdowns.min.css" rel="stylesheet">-->
+	<link
+		href="https://cdn.jsdelivr.net/gh/fontenele/bootstrap-navbar-dropdowns@5.0.2/dist/css/bootstrap-navbar-dropdowns.min.css"
+		rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+	        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+	        crossorigin="">   
+	</script>
+	
+
+</head>
+
+<body>
+
+<div><a id="btnHome" class="material-icons" href="/" role="button" title="Menu Principal">home</a></div>
+
+<div id="map">
+</div
+
+</body>
+
+</html>
+
+<script>
+
+	var map = L.map('map').setView([0.2249, 6.6179], 11);
+		      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+ 			  maxZoom: 19,
+		      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		}).addTo(map);
+
+	$.get("/contador_1/lista", function(data) {	 
+	    for (var i = 0; i < data.length; i++) { 	
+		    var marker = L.marker([data[i].georreferencia.latitude, data[i].georreferencia.longitude], {
+		    title: data[i].georreferencia.descricao  	         
+	        }).addTo(map);
+	     
+        var popupContent = "<span class='popup' > <b>Cliente: </b>           " + data[i].cliente.nome + "<br>" + 
+       											  "<b>Email :</b>            " + data[i].cliente.email +"<br>"+
+       											  "<b>Nº Conta:</b>          " + data[i].conta_numero +"<br>"+
+                                                  "<b>Nº Contador:</b>       " + data[i].numero_contador +"<br>"+
+                                                  "<b>Leitura Anterior:</b>  " + data[i].leitura_anterior +"<br>"+
+                                                  "<b>Nova Leitura :</b>     " + data[i].nova_leitura +"<br>"+
+                                                  "<b>Amperagem :</b>        " + data[i].amperagem +"<br>"+
+                                                  "<b>Ramal :</b>            " + data[i].ramal +"<br>"+
+                                                  "<b>Latitude:</b>          " + data[i].georreferencia.latitude +"<br>"+
+                                                  "<b>Longitude:</b>         " + data[i].georreferencia.longitude +"<br>"+
+                                                  "<b>Descrição:</b>         " + data[i].georreferencia.descricao +"</span>";
+        marker.bindPopup(popupContent);
+        marker.bindPopup(popupContent);
+        marker.on('mouseover', function (e) {
+        this.openPopup();
+        });    
+         
+    }   	
+});
+		L.circle([0.30693,6.65394], {radius: 10000}).addTo(map);
+ 
+		</script>
