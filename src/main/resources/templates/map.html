@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title> MAPJS Map Exemple</title>
+<title>Mapa LEAFLET</title>
 <!-- Leaflet's CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="crossorigin=""/>
 <style>
 #map{
-	width: 1270px;
-	height: 600px;
+	width: 1920px;
+	height: 910px;
 }
 .popup{
 	font-size: 1.5rem;
@@ -54,19 +54,19 @@
 
 <script>
 
-	var map = L.map('map').setView([0.2249, 6.6179], 11);
+	  var map = L.map('map').setView([0.2249, 6.6179], 11);
 		      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
  			  maxZoom: 19,
 		      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}).addTo(map);
 
-	$.get("/contador_1/lista", function(data) {	 
+	  $.get("/contador_1/lista", function(data) {	 
 	    for (var i = 0; i < data.length; i++) { 	
 		    var marker = L.marker([data[i].georreferencia.latitude, data[i].georreferencia.longitude], {
 		    title: data[i].georreferencia.descricao  	         
 	        }).addTo(map);
 	     
-        var popupContent = "<span class='popup' > <b>Cliente: </b>           " + data[i].cliente.nome + "<br>" + 
+        var popupContent = "<span class='popup' > <b>'Cliente: </b>           " + data[i].cliente.nome  +"<br>" + 
        											  "<b>Email :</b>            " + data[i].cliente.email +"<br>"+
        											  "<b>Nº Conta:</b>          " + data[i].conta_numero +"<br>"+
                                                   "<b>Nº Contador:</b>       " + data[i].numero_contador +"<br>"+
@@ -77,6 +77,8 @@
                                                   "<b>Latitude:</b>          " + data[i].georreferencia.latitude +"<br>"+
                                                   "<b>Longitude:</b>         " + data[i].georreferencia.longitude +"<br>"+
                                                   "<b>Descrição:</b>         " + data[i].georreferencia.descricao +"</span>";
+            
+                                               
         marker.bindPopup(popupContent);
         marker.bindPopup(popupContent);
         marker.on('mouseover', function (e) {

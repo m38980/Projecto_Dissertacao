@@ -63,7 +63,7 @@ public class MapController {
 	@GetMapping()
 	public String map() {
 		//List<Contador> listContadores = contadorService.listAll(keyword);
-		return "map.html";
+		return "map2";
 
 	}
 	@RequestMapping("/contador")

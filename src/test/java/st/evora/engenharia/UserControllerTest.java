@@ -39,16 +39,15 @@ public class UserControllerTest {
 		List<User>listUsers = new ArrayList<>();
 		Set<Role> roles = new HashSet<>();
 		roles.add(new Role("Admin"));
-		listUsers.add(new User((long) 4, "admin@gmail.com", "admin", "$2a$10$K9vzsL69JkyGc.XIEp2EP.vrBGZliPyR3socAyryHuJwLS31rbmR2", 
+		listUsers.add(new User((long) 1, "fp@gmail.com", "fp", "$2a$10$SqysacxgrksQj8r3S3cre.0ZMxs1Qh4KtpsI21Yd0fAeAjOhfADOq", 
 										  true, roles));
-		listUsers.add(new User((long) 5, "filipe@gmail.com", "filipe", "$2a$10$wfNyMcS.iw0sMnxrFo4gyuQq1.y5D/IvDk/Fo6iOrXtne7HIb9tea",
+		listUsers.add(new User((long) 2, "alz@gmail.com", "alz", "$2a$10$6I9qvgn7VmCVOw/u.H5dleaiYpjMBV2gfjuHlke9RvIPmSR406MT.",
 									      true, roles));
-		listUsers.add(new User((long) 6, "alzira@hotmail.com","alzira", "$2a$10$pyOJ47vUzPsunvcbmt5BiuTUmG3b3PtPJF7ZGw6.Lx11P/efD3Dxa",
+		listUsers.add(new User((long) 3, "lis@gmail.com","lis", "$2a$10$uFlwSUrseY6aHqikwKatg./bN2FpUfrifXHu8Q4mHmwfT9ETJOh6a",
 										  true, roles));
-		listUsers.add(new User((long) 7, "lisy@hotmail.com","lisy", "$2a$10$AFMKc9Rp1ykGwryH5Fk2Mu1dwjbesUE3Gr2nddxI9hf.09IQbgq36",
+		listUsers.add(new User((long) 4, "lav@gmail.com","lav", "$2a$10$arFt38Q7Jl1Tk2IQdI/bxONPhs0R.01PUOrZcY3pq.DZRikDlKw9e",
 										  true, roles));
-		listUsers.add(new User((long) 8, "lavinea@hotmail.com","lavinea", "$2a$10$eZb1LxUVmSaSojY0.OfJn..Y/QCAYaU482YiWkSS3sYE00zCOBb56",
-									      true, roles));
+		
 		Mockito.when(userService.listPdfUser()).thenReturn(listUsers);
 		String url = "/users/users/export/pdf";	
 		MvcResult mvcResult = mockMvc.perform(get(url)).andExpect(status().isOk()).andReturn();

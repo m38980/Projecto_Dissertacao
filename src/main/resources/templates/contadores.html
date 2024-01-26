@@ -141,31 +141,12 @@
 					<th>Leit Ant</th>
 					<th>Nova Leit</th>
 					
-					<th>
-						<a id="aLink"
-							th:href="@{'/contadores/getAll/page/' 
-							+ ${currentPage} + '?sortField=ramal&sortDir=' 
-							+ ${reverseSortDir}}">
-							Ramal</a>
-					</th>
-
-					<th>
-						 <a id="aLink"
-							th:href="@{'/contadores/getAll/page/' 
-							+ ${currentPage} + '?sortField=amperagem&sortDir=' 
-							+ ${reverseSortDir}}">
-							Ampere
-					</th>
-					<th>Georreferencia</th>
+					<th>Ramal</th>
+					<th>Ampere</th>
+					<th><span id="aLink"th:href="@{'/contadores/getAll/page/'+ ${currentPage} + '?sortField=descricao&sortDir='+ ${reverseSortDir}}">Georreferência</span></th>
 					<th>Ditrito</th>
-					<th>Cliente</th>
-					<th>
-							<a id="aLink"
-							th:href="@{'/contadores/getAll/page/' 
-							+ ${currentPage} + '?sortField=descricao&sortDir=' 
-							+ ${reverseSortDir}}">
-						Descrição</a>
-					</th>
+					<th><span id="aLink"th:href="@{'/contadores/getAll/page/'+ ${currentPage} + '?sortField=descricao&sortDir='+ ${reverseSortDir}}">Cliente</span></th>
+					<th>Descrição</th>
 					<td>Detalhe</td>
 					<td>Editar</td>
 					<td>Excluir</td>

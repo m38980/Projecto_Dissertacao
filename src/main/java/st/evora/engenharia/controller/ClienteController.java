@@ -97,8 +97,10 @@ public class ClienteController {
 			attributes.addFlashAttribute("mensagem", "Verifique os campos");
 			return "redirect:/clientes/getAll";
 		}
+		
 		attributes.addFlashAttribute("mensagem", "Cliente " + cliente.getNome() + " Adicionado com sucesso!");
 		return "redirect:/clientes/getAll";
+
 	}
 
 	/* END endPoints adicionarNovoCliente */
@@ -106,9 +108,17 @@ public class ClienteController {
 	/* BEGIN endPoints updateCliente */
 
 	@RequestMapping(value = "/update", method = { RequestMethod.PUT, RequestMethod.GET })
-	public String update(Cliente cliente) {
+	public String update(Cliente cliente, BindingResult result, RedirectAttributes attributes) {
 		clienteservice.update(cliente);
+		
+		if (result.hasErrors()) {
+			attributes.addFlashAttribute("mensagem", "Verifique os campos");
+			return "redirect:/clientes/getAll";
+		}
+		
+		attributes.addFlashAttribute("mensagem", "Cliente " + cliente.getNome() + " Cliente modificado com sucesso!");
 		return "redirect:/clientes/getAll";
+		
 	}
 
 	/* BEGIN endPoints updateCliente */

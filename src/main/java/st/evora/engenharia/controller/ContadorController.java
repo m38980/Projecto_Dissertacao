@@ -155,11 +155,18 @@ public class ContadorController {
 	
 	@RequestMapping(value = "/update",  method = { RequestMethod.PUT, RequestMethod.GET })
 	//este tem Contador é o teu model, q ai todas as variaveis q estºao ai, estao no teu front
-	public String update(Contador contador) {
+	public String update(Contador contador, BindingResult result, RedirectAttributes attributes) {
+		
 		contadorService.update(contador);
 		contadorService.save(contador);
-		//contadorService.saveCliente(cliente);
+		
+		if (result.hasErrors()) {
+			attributes.addFlashAttribute("mensagem", "Verifique os campos");
+			return "redirect:/contadores/getAll";
+		}
+		attributes.addFlashAttribute("mensagem", "Contador" + contador.getNumero_contador() + "Contador modificado com sucesso!");
 		return "redirect:/contadores/getAll";
+		//contadorService.saveCliente(cliente);
 	}
 	
 	/* END endPoints updateContador */

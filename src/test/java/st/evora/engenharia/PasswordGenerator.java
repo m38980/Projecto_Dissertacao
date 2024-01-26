@@ -7,9 +7,9 @@ public class PasswordGenerator {
 	public static void main(String[] args) {
 		
 		BCryptPasswordEncoder encoder = new  BCryptPasswordEncoder();
-		String  rawPassword4 = "filipe";
-		String encodedPassword4 = encoder.encode(rawPassword4); 		
-		System.out.println(encodedPassword4);
+		String  rawPassword8 = "password";
+		String encodedPassword8 = encoder.encode(rawPassword8); 		
+		System.out.println(encodedPassword8);
 		
 	}
 
