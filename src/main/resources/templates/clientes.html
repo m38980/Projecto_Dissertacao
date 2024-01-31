@@ -7,8 +7,7 @@
 	<script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../static/cliente.js" th:src="@{/cliente.js}"></script>
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	
 	<meta charset="ISO-8859-1">
 	<title>Gestão de Clientes</title>
@@ -87,13 +86,21 @@
 		.table-responsive {
 			display: table;
 		}
+			#arrow{
+		color: #17a2b8;
+		font-size: 30px;
+	}
+	#location{
+		color: #17a2b8;
+		font-size: 30px;
+	}
+	#meter {
+		color: #17a2b8;
+		font-size: 30px;
+
+		}
 	</style>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-		<div>
-			<h6></h6>
-		</div>
-		</div>
-	</nav>
+	
 	<br>
 
 	<div role="main" class="table-responsive">
@@ -106,6 +113,10 @@
 			</span>
 			&nbsp &nbsp;
 			<a id="btnHome" class="material-icons" href="/" role="button" title="Menu Principal">home</a>
+			&nbsp &nbsp;
+			<a id="location" href="/map/getAllmap" class="material-icons" title="Mapa">location_on</a>
+			&nbsp; &nbsp;
+			<a id="meter" href="/contadores/getAll" class="material-icons" title="Mapa">electric_meter</a>
 			&nbsp; &nbsp;
 			<button id="btnAdicionar" 
 					sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN', 'EDITOR')" 
@@ -196,7 +207,7 @@
 						
 						
 						<td>
-							<a th:href="@{/clientes/getOne/(Id=${cliente.idcliente})}" class="btn btn-info">Detalhe
+							<a th:href="@{/clientes/detalhes/{id} (id=${cliente.idcliente})}" class="btn btn-info">Detalhe
 
 							</a>
 						</td>
@@ -233,7 +244,7 @@
 							<span th:unless="${totalPages}">Previous</span>&nbsp;
 						</div>
 
-						<div class="col-sm-1">
+						<div class="pagination">
 							<span th:each="i: ${#numbers.sequence(1, totalPages)}">
 								<a th:if="${currentPage != i}"
 									th:href="@{'/clientes/getAll/page/' + 

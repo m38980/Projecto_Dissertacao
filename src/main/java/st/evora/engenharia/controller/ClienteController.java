@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,7 @@ import com.lowagie.text.DocumentException;
 
 import st.evora.engenharia.ClientePDFExporter;
 import st.evora.engenharia.model.Cliente;
+import st.evora.engenharia.model.Contador;
 import st.evora.engenharia.repository.ClienteRepository;
 import st.evora.engenharia.service.ClienteService;
 
@@ -38,6 +40,8 @@ public class ClienteController {
 
 	@Autowired
 	ClienteRepository clienteRepository;
+	
+private Cliente clienteEncontrado;
 	
 	/* BEGIN MÉTODO LISTAR TODOS CLIENTES */
 	
@@ -79,13 +83,38 @@ public class ClienteController {
 
 	/* BEGIN endPoints pegarClientePorID */
 	
-	@RequestMapping("/getOne")
-	@ResponseBody
-	public Optional<Cliente> getOne(Model model, Integer Id) {
-		return clienteservice.getOne(Id);
-	}
+	
+	
+	  @GetMapping("/detalhes/{id}") 
+	  public String getOne(@PathVariable("id") final int id, final Model model) {
+	  
+	  Cliente cliente = clienteservice.findById(id); 
+	  model.addAttribute("cliente", cliente); 
+	  return "clienteDetalhe"; 
+	  }
+	 
 
+		
+	  @RequestMapping("/getOne")
+	  @ResponseBody 
+	  public Optional<Cliente> getOne(Model model, Integer Id) {
+	  return clienteservice.getOne(Id);
+	  }
+	 
+	 
 	/* BEGIN endPoints pegarClientePorID */
+	/*
+	 * @GetMapping("/getOne") public ResponseEntity<Cliente> getOne(Model
+	 * Cliente,Integer Id) {
+	 * 
+	 * clienteEncontrado = clienteRepository.findById(Id).orElse(null); if
+	 * (clienteEncontrado != null) { return ResponseEntity.ok(clienteEncontrado); }
+	 * return ResponseEntity.notFound().build(); }
+	 */
+	
+	/* END endPoints pegarClientePorID */
+	
+	
 
 	/* BEGIN endPoints adicionarNovoCliente */
 	

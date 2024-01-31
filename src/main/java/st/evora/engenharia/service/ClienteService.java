@@ -46,9 +46,13 @@ public class ClienteService {
 	
 	/* BEGIN selecionar Por ID */ 
 	
-	public Optional<Cliente> getOne(Integer Id) {
-		return clienteRepository.findById(Id);
-	}
+	
+	  public Optional<Cliente> getOne(Integer Id) { return
+	  clienteRepository.findById(Id); }
+	 
+	public Cliente findById(final int id) {
+		return clienteRepository.getById(id);
+		}
 	/* BEGIN selecionar Por ID */ 
 	
 	/* BEGIN adiconar Cliente */ 

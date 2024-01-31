@@ -1,52 +1,172 @@
-
 <!DOCTYPE html>
-<html>
-<head>
-<title>Mapa LEAFLET</title>
-<!-- Leaflet's CSS -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="crossorigin=""/>
-<style>
-#map{
-	width: 1920px;
-	height: 910px;
-}
-.popup{
-	font-size: 1.5rem;
-	
-}
-#btnHome {
-	color: red;
-	font-size: 40px;
-	margin-left: 50px;
-	position: fixed;
-		}
-</style
-<!-- Bootstrap -->
-	<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-	<!--        <link href="dist/css/bootstrap-navbar-dropdowns.min.css" rel="stylesheet">-->
-	<link
-		href="https://cdn.jsdelivr.net/gh/fontenele/bootstrap-navbar-dropdowns@5.0.2/dist/css/bootstrap-navbar-dropdowns.min.css"
-		rel="stylesheet">
 
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>REST API geoMeter</title>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" 
+	      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+		  integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" 
+		  crossorigin="anonymous">
+
+	<link rel="stylesheet" 
+	      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+		  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+		  crossorigin="" />
 	
+<!--	<link href="https://cdn.jsdelivr.net/gh/fontenele/bootstrap-navbar-dropdowns@5.0.2/dist/css/bootstrap-navbar-dropdowns.min.css"
+		  rel="stylesheet">-->
+  
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" 
+	      rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-	        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-	        crossorigin="">   
+		    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+		    crossorigin="">
 	</script>
 	
+<style>
+		#map {
+			width: 50%;
+			height: 150px;
+			position:fixed;
+			margin-left:350px; 
+			font-size: 1em;
+            }
+.leaflet-container {
+         overflow: visible; 
+         margin-top:150px !important;
+         height: 100%;
+         position:fixed !important;
 
+		}
+		
+img {
+		margin-top: -35px;
+	}
+
+		ul li {
+			position: relative;
+			display: inline-block;
+			border-radius: 5px;
+			background-color: #EEE;
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+			transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+		}
+
+		ul li:hover {
+			background-color: #fff;
+			opacity: 1;
+		}
+
+		ul li:hover::after {
+			opacity: 1;
+		}
+
+		span {
+			margin-right: 10px;
+		}
+
+		.logado {
+			margin-left: 800px;
+			margin-top: 5px;
+		}
+
+
+
+		#power {
+			color: red;
+			margin-top: 10px;
+		}
+
+		#home {
+			color: #17a2b8;
+			font-size: 40px;
+		}
+
+		#clientes {
+			color: #17a2b8;
+			font-size: 40px;
+
+		}
+
+		#meter {
+			color: #17a2b8;
+			font-size: 40px;
+
+		}
+		
+		#mapIcone {
+			color: #17a2b8;
+			font-size: 40px;
+			background-color: transparent;
+		}
+
+		#user {
+			color: #17a2b8;
+			font-size: 40px;
+		}
+
+	</style>
 </head>
-
 <body>
 
-<div><a id="btnHome" class="material-icons" href="/" role="button" title="Menu Principal">home</a></div>
+<br>
+		<!-- Static navbar -->
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+						aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+						GeoMeter <img alt="" src="../images/api.png" width="50px">
+					</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="/" class="material-icons" id="home">home</a></li>
+						<li><a href="/clientes/getAll" class="material-icons" id="clientes">groups</a></li>
+						<li><a href="/contadores/getAll" class="material-icons" id="meter">electric_meter</a></li>
+						<li><a href="/users/getAll" class="material-icons" id="user">manage_accounts</a></li>
+						<li><a href="/map/getAllmap" class="material-icons" id="mapIcone">location_on</a></li>
 
-<div id="map">
-</div
+					</ul>
+					<div class="logado" sec:authorize="isAuthenticated()">&nbsp &nbsp &nbsp &nbsp
+						&nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+						Benvindo: <b style="color: blue;"><span sec:authentication="name"></span></b>
+						&nbsp; Perfil: &nbsp;&nbsp;&nbsp;<b style="color: blue;"><span sec:authentication="principal.authorities">Roles</span>  </b>
+						&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp;
+
+						<form th:action="@{/logout}" 
+						      title="Sair" 
+						      method="post" 
+						      th:hidden="true" 
+						      name="logoutForm">
+							<input type="submit" value="Logout" />logout
+						</form>
+							<a  class="material-icons" id="power" title="Logout"
+								href="javascript: document.logoutForm.submit()">settings_power</a>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+					</ul>
+
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+			<!--/.container-fluid -->
+		</nav>
+	
+	<div id="map"></div>
 
 </body>
 
@@ -59,14 +179,14 @@
  			  maxZoom: 19,
 		      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}).addTo(map);
-
+		//map.dragging.disable();
 	  $.get("/contador_1/lista", function(data) {	 
 	    for (var i = 0; i < data.length; i++) { 	
 		    var marker = L.marker([data[i].georreferencia.latitude, data[i].georreferencia.longitude], {
 		    title: data[i].georreferencia.descricao  	         
 	        }).addTo(map);
 	     
-        var popupContent = "<span class='popup' > <b>'Cliente: </b>           " + data[i].cliente.nome  +"<br>" + 
+        var popupContent = "<span class='popup' > <b>Cliente: </b>  <a href=\"/clientes/detalhes/"+data[i].cliente.idcliente+"\"> " + data[i].cliente.nome + "</a><br>" + 
        											  "<b>Email :</b>            " + data[i].cliente.email +"<br>"+
        											  "<b>Nº Conta:</b>          " + data[i].conta_numero +"<br>"+
                                                   "<b>Nº Contador:</b>       " + data[i].numero_contador +"<br>"+
@@ -80,7 +200,6 @@
             
                                                
         marker.bindPopup(popupContent);
-        marker.bindPopup(popupContent);
         marker.on('mouseover', function (e) {
         this.openPopup();
         });    
@@ -89,4 +208,4 @@
 });
 		L.circle([0.30693,6.65394], {radius: 10000}).addTo(map);
  
-		</script>
+</script>

@@ -169,8 +169,14 @@
 								id= "aLink" th:href="@{'/users/getAll/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
 								E-mail</a>
 						</th>
-
-						<th>Status</th>
+						
+						<th>
+							<a
+								id= "aLink" th:href="@{'/users/getAll/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+								Status</a>
+						</th>
+						
+						<th>Detalhe</th>
 						<td>Editar</td>
 						<td>Excluir</td>
 						
@@ -188,6 +194,14 @@
 					<td th:text="${user.password}"></td>
 					<td th:text="${user.email}"></td>
 					<td th:text="${user.enabled}"></td>
+					
+					
+					<td>
+						<a th:href="@{/users/detalhes/{id} (id=${user.id})}" class="btn btn-info"
+							>Detalhe
+
+						</a>
+					</td>
 					
 					<td>
 							<a th:href="@{/users/getOne/(Id=${user.id})}" class="btn btn-warning" id="editButton"

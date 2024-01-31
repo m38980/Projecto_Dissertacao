@@ -152,18 +152,6 @@
 
 	</div><!-- /.container -->
 
-
-
-
-	<script type="text/javascript">
-		function clearSearch() {
-			window.location = "[[@{/clientes/getAll}]]";
-		}
-	</script>
-
-	<!--  END Script Limpar pesquisa Chamados -->
-
-
 	<script>
 
 		var map = L.map('map').setView([0.2249, 6.6179], 11);
@@ -179,19 +167,17 @@
 				}).addTo(map);
 
 				var popupContent = "<span class='popup' > <b>Cliente: </b>  <a href=\"/clientes/getOne/?Id="+data[i].cliente.idcliente+"\"> " + data[i].cliente.nome + "</a><br>" +
-					"<b>Email :</b>            " + data[i].cliente.email + "<br>" +
-					"<b>Nº Conta:</b>          " + data[i].conta_numero + "<br>" +
-					"<b>Nº Contador:</b>       " + data[i].numero_contador + "<br>" +
-					"<b>Leitura Anterior:</b>  " + data[i].leitura_anterior + "<br>" +
-					"<b>Nova Leitura :</b>     " + data[i].nova_leitura + "<br>" +
-					"<b>Amperagem :</b>        " + data[i].amperagem + "<br>" +
-					"<b>Ramal :</b>            " + data[i].ramal + "<br>" +
-					"<b>Latitude:</b>          " + data[i].georreferencia.latitude + "<br>" +
-					"<b>Longitude:</b>         " + data[i].georreferencia.longitude + "<br>" +
-					"<b>Descrição:</b>         " + data[i].georreferencia.descricao + "</span>";
+													     "<b>Email :</b>            " + data[i].cliente.email + "<br>" +
+														 "<b>Nº Conta:</b>          " + data[i].conta_numero + "<br>" +
+														 "<b>Nº Contador:</b>       " + data[i].numero_contador + "<br>" +
+														 "<b>Leitura Anterior:</b>  " + data[i].leitura_anterior + "<br>" +
+														 "<b>Nova Leitura :</b>     " + data[i].nova_leitura + "<br>" +
+														 "<b>Amperagem :</b>        " + data[i].amperagem + "<br>" +
+														 "<b>Ramal :</b>            " + data[i].ramal + "<br>" +
+														 "<b>Latitude:</b>          " + data[i].georreferencia.latitude + "<br>" +
+														 "<b>Longitude:</b>         " + data[i].georreferencia.longitude + "<br>" +
+														 "<b>Descrição:</b>         " + data[i].georreferencia.descricao + "</span>";
 
-
-				marker.bindPopup(popupContent);
 				marker.bindPopup(popupContent);
 				marker.on('mouseover', function (e) {
 					this.openPopup();

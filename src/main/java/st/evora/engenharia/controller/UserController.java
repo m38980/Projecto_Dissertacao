@@ -80,11 +80,21 @@ public class UserController {
 	/*  END PAGINATION GENERATED */
 	
 	
-	@RequestMapping("/getOne")
-	@ResponseBody
-	public Optional<User> getOne(Model model, Long Id) {
-		return userService.getOne(Id);
-	}
+	/*
+	 * @RequestMapping("/getOne")
+	 * 
+	 * @ResponseBody public Optional<User> getOne(Model model, Long Id) { return
+	 * userService.getOne(Id); }
+	 */
+	
+	
+	  @GetMapping("/detalhes/{id}") 
+	  public String getOne(@PathVariable("id") final int id, final Model model) {
+	  
+	  User user = userService.findById(id); 
+	  model.addAttribute("user", user); 
+	  return "userDetalhe"; 
+	  }
 	
 	@PostMapping("/addNew")
 	public String addNew(User user) {

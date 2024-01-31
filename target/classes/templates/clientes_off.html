@@ -86,19 +86,6 @@
 		.table-responsive {
 			display: table;
 		}
-			#arrow{
-		color: #17a2b8;
-		font-size: 30px;
-	}
-	#location{
-		color: #17a2b8;
-		font-size: 30px;
-	}
-	#meter {
-		color: #17a2b8;
-		font-size: 30px;
-
-		}
 	</style>
 	
 	<br>
@@ -113,10 +100,6 @@
 			</span>
 			&nbsp &nbsp;
 			<a id="btnHome" class="material-icons" href="/" role="button" title="Menu Principal">home</a>
-			&nbsp &nbsp;
-			<a id="location" href="/map/getAllmap" class="material-icons" title="Mapa">location_on</a>
-			&nbsp; &nbsp;
-			<a id="meter" href="/contadores/getAll" class="material-icons" title="Mapa">electric_meter</a>
 			&nbsp; &nbsp;
 			<button id="btnAdicionar" 
 					sec:authorize="hasAnyAuthority('CREATOR', 'ADMIN', 'EDITOR')" 

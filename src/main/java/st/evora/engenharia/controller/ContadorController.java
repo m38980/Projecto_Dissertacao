@@ -124,15 +124,28 @@ public class ContadorController {
 		model.addAttribute("listContadores", listContadores);
 		return "contadores";
 	}
+	
+	
+	  @GetMapping("/detalhes/{id}") 
+	  public String getOne(@PathVariable("id") final int id, final Model model) {
+	  
+	  Contador contador = contadorService.findById(id); 
+	  model.addAttribute("contador", contador); 
+	  return "contadorDetalhe"; 
+	  }
+	  
 	/* END PAGINATION GENERATED */
 
 	/* BEGIN endPoints pegarContadorPorID */
-	@RequestMapping("/getOne")
-	@ResponseBody
-	public Optional<Contador> getOne(Model model, Long Id) {
-		// model.addAttribute("Contador", contador);
-		return contadorService.getOne(Id);
-	}
+	
+	  @RequestMapping("/getOne")
+	  @ResponseBody 
+	  public Optional<Contador> getOne(Model model, Long Id) {
+	  Optional<Contador> contador = contadorService.getOne(Id); 
+	  model.addAttribute("Contador", contador); 
+	  return contadorService.getOne(Id);
+	  }
+	 
 
 	/* BEGIN endPoints pegarContadorPorID */
 	/*

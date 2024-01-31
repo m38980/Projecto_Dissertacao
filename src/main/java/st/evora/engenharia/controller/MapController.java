@@ -63,17 +63,16 @@ public class MapController {
 	@GetMapping()
 	public String map() {
 		//List<Contador> listContadores = contadorService.listAll(keyword);
-		return "map2";
+		return "map";
 
 	}
-	@RequestMapping("/contador")
-	public class ContadorController {
-	    @Autowired
-	    private ContadorRepository contadorRepository;
-
-	    @GetMapping("/list")
-	    public List<Contador> listContador() {
-	        return contadorRepository.findAll();
-	    }
-	}
+	/*
+	 * @RequestMapping("/contador") public class ContadorController {
+	 * 
+	 * @Autowired private ContadorRepository contadorRepository;
+	 * 
+	 * @GetMapping("/list") public List<Contador> listContador() { return
+	 * contadorRepository.findAll(); } }
+	 */
+	
 }

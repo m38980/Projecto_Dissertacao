@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import st.evora.engenharia.model.Cliente;
+import st.evora.engenharia.model.Contador;
 import st.evora.engenharia.model.User;
 import st.evora.engenharia.repository.UserRepository;
 
@@ -46,6 +47,11 @@ public class UserService {
 	public Optional<User> getOne(Long Id) {
 		return userRepository.findById(Id);
 	}
+	
+	public User findById(final int id) {
+		return userRepository.getById((long) id);
+	}
+	
 	/*public void save(User user) {
 		userRepository.save(user);
 	}

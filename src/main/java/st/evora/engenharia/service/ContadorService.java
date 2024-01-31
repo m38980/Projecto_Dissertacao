@@ -63,7 +63,11 @@ public class ContadorService {
 		return contadorRepository.findById(Id);
 	}
 	/* BEGIN selecionar Por ID */
-
+	
+	public Contador findById(final int id) {
+		return contadorRepository.getById((long) id);
+	}
+	
 	/* BEGIN adiconar Contador */
 	public void addNew(Contador contador) {
 		contadorRepository.save(contador);
